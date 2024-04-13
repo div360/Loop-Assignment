@@ -26,7 +26,10 @@ async def trigger_report(background_tasks: BackgroundTasks):
         reports_ids.append(report_id)
         if not db.query(StoreActivity).filter(StoreActivity.store_id == store_id).first():
             continue
-        current_time = datetime.datetime.now(pytz.utc)
+        time_string = "2023-01-25 18:13:22.47922"
+
+        current_time = datetime.strptime(time_string, "%Y-%m-%d %H:%M:%S.%f")
+
         background_tasks.add_task(formatted_results(store_id, report_id, current_time, db), store_id, report_id)
     return {"report_ids": reports_ids}
 
