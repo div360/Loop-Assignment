@@ -36,12 +36,12 @@ Returns "Complete" with a downloadable CSV report upon completion
 
 - config.py: Contains configuration settings. This likely includes database connection details, API-specific settings, and potentially the path to your CSV data sources.
 - database.py: Handles database interactions. Here you'd find functions for connecting to the database, executing queries (like retrieving activities, business hours, and timezones), and potentially storing the generated reports.
-- main.py: The core of your FastAPI application. It sets up the API, defines endpoints (like /trigger_report and /get_report), and likely imports and uses functionality from other modules.
-- models.py: Likely defines data models using a framework like SQLAlchemy or Pydantic. These models represent entities like Store, Activity, BusinessHours, and Report.
+- main.py: The core of FastAPI application. It sets up the API, defines endpoints (like /trigger_report and /get_report), and likely imports and uses functionality from other modules.
+- models.py: Defines data models using a framework like SQLAlchemy. These models represent entities like Store, Activity, BusinessHours, Timezone and StoreReport.
 - script.py: A potential script for data loading or preprocessing. This might handle the initial loading of the CSV data into your database.
-- service.py: Contains the core business logic for report generation. This is where you would find the functions that calculate uptime/downtime, handle time intervals, and implement your extrapolation logic.
-- utils.py: Houses various helper functions for tasks like timezone conversions, date/time manipulation, and potentially CSV file handling.
-test/test.py: Your unit tests! It's essential to have tests to verify your code's behavior, especially for a task with complex calculations like this.
+- service.py: Contains the core business logic for report generation. This is where you would find the functions that calculate uptime/downtime, handle time intervals, and implementation extrapolation logic.
+- utils.py: Houses various helper functions for tasks like timezone conversions.
+test/test.py: Unit tests.
 
 ### How to run the application
 - After the assumptions point
@@ -140,6 +140,7 @@ FastAPI and its dependencies (like Uvicorn)
    - Install dependencies: pip install -r requirements.txt
    - Configure your database connection details in config.py.
    - Potential initial setup: If data is not preloaded, you might need to run script.py or a similar mechanism to load the CSVs into your database.
+   -  First run the tests inside the test directory to get the basic understanding of the functioning
    - Start the Application
 
    - From the project's src directory, run the command to start a Uvicorn development server: uvicorn main:app --reload
