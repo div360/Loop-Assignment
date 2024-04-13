@@ -30,6 +30,22 @@ Returns "Complete" with a downloadable CSV report upon completion
 - Fast API
 - Postgres Database
 
+### File Structure
+
+- Project Structure
+
+- config.py: Contains configuration settings. This likely includes database connection details, API-specific settings, and potentially the path to your CSV data sources.
+- database.py: Handles database interactions. Here you'd find functions for connecting to the database, executing queries (like retrieving activities, business hours, and timezones), and potentially storing the generated reports.
+- main.py: The core of your FastAPI application. It sets up the API, defines endpoints (like /trigger_report and /get_report), and likely imports and uses functionality from other modules.
+- models.py: Likely defines data models using a framework like SQLAlchemy or Pydantic. These models represent entities like Store, Activity, BusinessHours, and Report.
+- script.py: A potential script for data loading or preprocessing. This might handle the initial loading of the CSV data into your database.
+- service.py: Contains the core business logic for report generation. This is where you would find the functions that calculate uptime/downtime, handle time intervals, and implement your extrapolation logic.
+- utils.py: Houses various helper functions for tasks like timezone conversions, date/time manipulation, and potentially CSV file handling.
+test/test.py: Your unit tests! It's essential to have tests to verify your code's behavior, especially for a task with complex calculations like this.
+
+### How to run the application
+- After the assumptions point
+
 ### Logic and edge cases handled
 
 #### 1. Initialization
@@ -108,4 +124,23 @@ If business hours data is missing, the store is assumed to be open 24/7 for the 
 - #### **Current Timestamp:** 
    - I have taken the current time as 2023-01-25 18:13:22.47922 because it was the latest value of time in the data
 
+### How to run the application
+
+- Prerequisites
+
+   - Python (appropriate version)
+FastAPI and its dependencies (like Uvicorn)
+   - A database system PostgreSQL and its corresponding Python driver.
+    - Optional: A virtual environment to isolate project dependencies.
+
+- Setup
+
+   - Clone the GitHub repository
+   - If using a virtual environment, activate it.
+   - Install dependencies: pip install -r requirements.txt
+   - Configure your database connection details in config.py.
+   - Potential initial setup: If data is not preloaded, you might need to run script.py or a similar mechanism to load the CSVs into your database.
+   - Start the Application
+
+   - From the project's src directory, run the command to start a Uvicorn development server: uvicorn main:app --reload
  
